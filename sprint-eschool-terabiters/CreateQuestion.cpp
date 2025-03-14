@@ -1,10 +1,11 @@
-#include <iostream>
+/*#include <iostream>
 #include <string>
 
 
 using namespace std;
 
-void Question() {
+
+string Question() {
 
 
 
@@ -51,4 +52,4 @@ void Question() {
 
 
 
-}
+}*/
