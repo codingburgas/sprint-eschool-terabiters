@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CreateQuestion.cpp" />
     <ClCompile Include="sprint-eschool-terabiters.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CreateQuestion.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

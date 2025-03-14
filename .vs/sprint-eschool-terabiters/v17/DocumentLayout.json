@@ -5,6 +5,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\sprint-eschool-terabiters.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|solutionrelative:sprint-eschool-terabiters\\sprint-eschool-terabiters.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\CreateQuestion.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|solutionrelative:sprint-eschool-terabiters\\CreateQuestion.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\CreateQuestion.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|solutionrelative:sprint-eschool-terabiters\\CreateQuestion.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -24,9 +32,36 @@
               "RelativeDocumentMoniker": "sprint-eschool-terabiters\\sprint-eschool-terabiters.cpp",
               "ToolTip": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\sprint-eschool-terabiters.cpp",
               "RelativeToolTip": "sprint-eschool-terabiters\\sprint-eschool-terabiters.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-12T16:58:35.222Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CreateQuestion.h",
+              "DocumentMoniker": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\CreateQuestion.h",
+              "RelativeDocumentMoniker": "sprint-eschool-terabiters\\CreateQuestion.h",
+              "ToolTip": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\CreateQuestion.h",
+              "RelativeToolTip": "sprint-eschool-terabiters\\CreateQuestion.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-14T16:09:23.066Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CreateQuestion.cpp",
+              "DocumentMoniker": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\CreateQuestion.cpp",
+              "RelativeDocumentMoniker": "sprint-eschool-terabiters\\CreateQuestion.cpp",
+              "ToolTip": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\CreateQuestion.cpp",
+              "RelativeToolTip": "sprint-eschool-terabiters\\CreateQuestion.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-14T16:09:12.123Z",
               "EditorCaption": ""
             }
           ]
