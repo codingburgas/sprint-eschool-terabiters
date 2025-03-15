@@ -2,47 +2,52 @@
 #include "QuizData.h"
 #include <iostream>
 
-using namespace std;
-
 void TakeQuiz() {
     if (testCounts > 0) {
-        cout << "\nSelect a Test:\n";
-        //shows the list of available tests
+        std::cout << "\nSelect a Test:\n";
+
         for (int i = 0; i < testCounts; i++) {
-            cout << i + 1 << ". " << testNames[i] << endl;
+            std::cout << i + 1 << ". " << testNames[i] << std::endl;
         }
-        //input wich test you want to take
+
         int testChoice;
-        cout << "Enter the test number: ";
-        cin >> testChoice;
-        cin.ignore();
-        //this makes sure that the test number testChoice exists within available tests
+        std::cout << "Enter the test number: ";
+        std::cin >> testChoice;
+        std::cin.ignore();
+
         if (testChoice >= 1 && testChoice <= testCounts) {
-            int selectedTestIndex = testChoice - 1; //get the index of the selected test, since the indexes start from 0 not 1
-            //run selected test
+            int selectedTestIndex = testChoice - 1;
             int score = 0;
             for (int i = 0; i < questionCount; i++) {
-                cout << "\nQuestion " << i + 1 << ": " << questions[i] << endl;
-                string userAnswer; //to store the answer
-                cout << "Your answer: ";
-                getline(cin, userAnswer);
-                //check if the answer is correct
+                std::cout << "\nQuestion " << i + 1 << ": " << questions[i] << std::endl;
+
+                std::string userAnswer;
+                std::cout << "Your answer: ";
+                std::getline(std::cin, userAnswer);
+
                 bool correct = false;
                 for (int j = 0; j < answerCounts[i]; j++) {
                     if (userAnswer == answers[i][j]) {
                         correct = true;
-                        break; //exit loop
+                        break;
                     }
                 }
+
                 if (correct) {
-                    cout << "Correct!\n";
+                    std::cout << "Correct!\n";
                     score++;
                 }
-                else { cout << "Incorrect.\n"; }
+                else {
+                    std::cout << "Incorrect.\n";
+                }
             }
-            cout << "\nYour score: " << score << " out of " << questionCount << endl;
+            std::cout << "\nYour score: " << score << " out of " << questionCount << std::endl;
         }
-        else { cout << "Invalid test number.\n"; }
+        else {
+            std::cout << "Invalid test number.\n";
+        }
     }
-    else { cout << "No tests available.\n"; }
+    else {
+        std::cout << "No tests available.\n";
+    }
 }
