@@ -127,16 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CreateQuiz.cpp" />
-    <ClCompile Include="QuizMenu.h" />
-    <ClCompile Include="QuizMenu.cpp" />
     <ClCompile Include="sprint-eschool-terabiters.cpp" />
-    <ClCompile Include="TakeQuiz.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CreateQuiz.h" />
-    <ClInclude Include="QuizData.h" />
-    <ClInclude Include="TakeQuiz.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

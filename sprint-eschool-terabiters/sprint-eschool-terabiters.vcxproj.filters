@@ -18,28 +18,5 @@
     <ClCompile Include="sprint-eschool-terabiters.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CreateQuiz.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QuizMenu.h">
-      <Filter>Resource Files\Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QuizMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TakeQuiz.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CreateQuiz.h">
-      <Filter>Resource Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QuizData.h">
-      <Filter>Resource Files\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TakeQuiz.h">
-      <Filter>Resource Files\Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

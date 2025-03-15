@@ -1,7 +1,4 @@
-﻿  CreateQuiz.cpp
-C:\Users\damya\OneDrive\Desktop\repos\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(7,19): error C1075: '{': no matching token found
-  QuizMenu.h
-  QuizMenu.cpp
-  sprint-eschool-terabiters.cpp
-  TakeQuiz.cpp
-  Generating Code...
+﻿  sprint-eschool-terabiters.cpp
+  sprint-eschool-terabiters.vcxproj -> C:\Users\damya\OneDrive\Desktop\repos\sprint-eschool-terabiters\x64\Debug\sprint-eschool-terabiters.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.
