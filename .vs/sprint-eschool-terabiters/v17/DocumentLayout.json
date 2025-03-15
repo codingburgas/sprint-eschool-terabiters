@@ -3,8 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\QuizData.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|solutionrelative:sprint-eschool-terabiters\\QuizData.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\sprint-eschool-terabiters.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|solutionrelative:sprint-eschool-terabiters\\sprint-eschool-terabiters.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\QuizMenu.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|solutionrelative:sprint-eschool-terabiters\\QuizMenu.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\QuizMenu.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|solutionrelative:sprint-eschool-terabiters\\QuizMenu.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\CreateQuiz.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|solutionrelative:sprint-eschool-terabiters\\CreateQuiz.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\CreateQuiz.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|solutionrelative:sprint-eschool-terabiters\\CreateQuiz.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\TakeQuiz.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|solutionrelative:sprint-eschool-terabiters\\TakeQuiz.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\TakeQuiz.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A94F3B95-D3D9-4131-AA0C-29FF1BA93E71}|sprint-eschool-terabiters\\sprint-eschool-terabiters.vcxproj|solutionrelative:sprint-eschool-terabiters\\TakeQuiz.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,19 +42,117 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "sprint-eschool-terabiters.cpp",
               "DocumentMoniker": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\sprint-eschool-terabiters.cpp",
               "RelativeDocumentMoniker": "sprint-eschool-terabiters\\sprint-eschool-terabiters.cpp",
               "ToolTip": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\sprint-eschool-terabiters.cpp",
               "RelativeToolTip": "sprint-eschool-terabiters\\sprint-eschool-terabiters.cpp",
-              "ViewState": "AgIAAMQAAAAAAAAAAAAuwMwAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-12T16:58:35.222Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "QuizData.h",
+              "DocumentMoniker": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\QuizData.h",
+              "RelativeDocumentMoniker": "sprint-eschool-terabiters\\QuizData.h",
+              "ToolTip": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\QuizData.h",
+              "RelativeToolTip": "sprint-eschool-terabiters\\QuizData.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-15T20:54:46.373Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "QuizMenu.h",
+              "DocumentMoniker": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\QuizMenu.h",
+              "RelativeDocumentMoniker": "sprint-eschool-terabiters\\QuizMenu.h",
+              "ToolTip": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\QuizMenu.h",
+              "RelativeToolTip": "sprint-eschool-terabiters\\QuizMenu.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-15T20:55:58.744Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "QuizMenu.cpp",
+              "DocumentMoniker": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\QuizMenu.cpp",
+              "RelativeDocumentMoniker": "sprint-eschool-terabiters\\QuizMenu.cpp",
+              "ToolTip": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\QuizMenu.cpp",
+              "RelativeToolTip": "sprint-eschool-terabiters\\QuizMenu.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-15T20:56:18.986Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CreateQuiz.h",
+              "DocumentMoniker": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\CreateQuiz.h",
+              "RelativeDocumentMoniker": "sprint-eschool-terabiters\\CreateQuiz.h",
+              "ToolTip": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\CreateQuiz.h",
+              "RelativeToolTip": "sprint-eschool-terabiters\\CreateQuiz.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-15T20:42:47.42Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CreateQuiz.cpp",
+              "DocumentMoniker": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\CreateQuiz.cpp",
+              "RelativeDocumentMoniker": "sprint-eschool-terabiters\\CreateQuiz.cpp",
+              "ToolTip": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\CreateQuiz.cpp",
+              "RelativeToolTip": "sprint-eschool-terabiters\\CreateQuiz.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-15T20:42:56.715Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TakeQuiz.h",
+              "DocumentMoniker": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\TakeQuiz.h",
+              "RelativeDocumentMoniker": "sprint-eschool-terabiters\\TakeQuiz.h",
+              "ToolTip": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\TakeQuiz.h",
+              "RelativeToolTip": "sprint-eschool-terabiters\\TakeQuiz.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-15T20:59:49.241Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TakeQuiz.cpp",
+              "DocumentMoniker": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\TakeQuiz.cpp",
+              "RelativeDocumentMoniker": "sprint-eschool-terabiters\\TakeQuiz.cpp",
+              "ToolTip": "C:\\Users\\damya\\OneDrive\\Desktop\\repos\\sprint-eschool-terabiters\\sprint-eschool-terabiters\\TakeQuiz.cpp",
+              "RelativeToolTip": "sprint-eschool-terabiters\\TakeQuiz.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-15T21:00:07.678Z",
               "IsPinned": true,
               "EditorCaption": ""
             }
