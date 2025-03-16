@@ -1,53 +1,69 @@
 #include "TakeQuiz.h"
 #include "QuizData.h"
+#include "CalculatePercent.h"
 #include <iostream>
 
-void TakeQuiz() {
-    if (testCounts > 0) {
-        std::cout << "\nSelect a Test:\n";
+using namespace std;
 
+void TakeQuiz() {
+
+
+    if (testCounts > 0) {//chek if there's a test
+
+        cout << "\nSelect a Test:\n";
+
+        //shows the created tests
         for (int i = 0; i < testCounts; i++) {
-            std::cout << i + 1 << ". " << testNames[i] << std::endl;
+            cout << i + 1 << ". " << testNames[i] << endl;
         }
 
         int testChoice;
-        std::cout << "Enter the test number: ";
-        std::cin >> testChoice;
-        std::cin.ignore();
+        cout << "Enter the test number: ";
+        cin >> testChoice;
+        cin.ignore();
 
+        //this makes sure that the test number testChoice exists within available tests
         if (testChoice >= 1 && testChoice <= testCounts) {
-            int selectedTestIndex = testChoice - 1;
+            int selectedTestIndex = testChoice - 1; //get the index of the selected test, since the indexes start from 0 not 1
+
+
             int score = 0;
+
+            //runs the test
             for (int i = 0; i < questionCount; i++) {
-                std::cout << "\nQuestion " << i + 1 << ": " << questions[i] << std::endl;
 
-                std::string userAnswer;
-                std::cout << "Your answer: ";
-                std::getline(std::cin, userAnswer);
+                cout << "\nQuestion " << i + 1 << ": " << questions[i] << endl;
 
+                string userAnswer;
+
+                cout << "Your answer: ";
+                getline(cin, userAnswer);
+
+                
                 bool correct = false;
-                for (int j = 0; j < answerCounts[i]; j++) {
-                    if (userAnswer == answers[i][j]) {
-                        correct = true;
-                        break;
-                    }
-                }
 
-                if (correct) {
-                    std::cout << "Correct!\n";
+                for (int j = 0; j < answerCounts[i]; j++) {
+
+                    if (userAnswer == answers[i][j]) {//check if the answer is correct
+                        correct = true;
+                        break; 
+                    }
+
+                } if (correct) {
+               
+                    cout << "Correct!\n";
                     score++;
-                }
-                else {
-                    std::cout << "Incorrect.\n";
+
+                } else {
+                  cout << "Incorrect.\n"; 
                 }
             }
-            std::cout << "\nYour score: " << score << " out of " << questionCount << std::endl;
+
+          
+            cout << "\nYour score: " << score << " out of " << questionCount << "\n Your have "<<percent(score, questionCount)<<"%\n";
+
         }
-        else {
-            std::cout << "Invalid test number.\n";
-        }
+        else { cout << "Invalid test number.\n"; }
     }
-    else {
-        std::cout << "No tests available.\n";
-    }
+    else { cout << "No tests available.\n"; }
 }

@@ -2,66 +2,80 @@
 #include "QuizData.h"
 #include <iostream>
 
+using namespace std;
+
 void CreateQuiz() {
-    if (testCounts < MaxTests) {
-        std::string testName;
 
-        std::cout << "Enter a name for the test: ";
-        std::getline(std::cin, testName);
 
-        testNames[testCounts] = testName;
-        testCounts++;
+    if (testCounts < MaxTests) { //if the maximum number of tests has been reached(testCounts now is 0)
 
-        questionCount = 0;
+        string testName;
 
-        std::string input;
+        cout << "Enter a name for the test: ";
+        getline(cin, testName);
 
-        while (questionCount < MaxQuestions) {
-            std::cout << "Enter a question or 'done' to finish: ";
-            std::getline(std::cin, input);
+        testNames[testCounts] = testName; //store the test name
 
-            if (input == "done") {
-                break;
-            }
-            questions[questionCount] = input;
+        testCounts++; //increment the test count
 
-            std::string YESorNO;
+        questionCount = 0; //reset the question count
 
-            std::cout << "Do you want it to have multiple answers? Yes(y) or No(n)?\n";
-            std::cin >> YESorNO;
-            std::cin.ignore();
+        //                                                                  | |
+        //loop until input "done" or reaches the max number of questions    V V
+
+        string input;
+
+        while (questionCount < MaxQuestions) { // questionCount that we reset and now is 0
+
+            cout << "Quiestion number "<< questionCount + 1 <<" or 'done' to finish : ";
+            getline(cin, input);
+
+            if (input == "done") { break; } // to exit when typed 'done'
+
+            questions[questionCount] = input; //to store the question
+
+
+            //if it wants multiples answers yes or no
+            string YESorNO;
+
+            cout << "Do you want it to have multiple answers? Yes(y) or No(n)?\n";
+            cin >> YESorNO;
+            cin.ignore();
 
             if (YESorNO == "Yes" || YESorNO == "yes" || YESorNO == "Y" || YESorNO == "y") {
-                std::cout << "How many correct answers do you want it to have? (Max " << MaxAnswers << ")\n";
 
-                int count;
-                std::cin >> count;
-                std::cin.ignore();
+                cout << "How many correct answers do you want it to have? (Max " << MaxAnswers << ")\n";
 
-                if (count > MaxAnswers) {
-                    count = MaxAnswers;
+                int count; //to store number of correct answers we want
+                cin >> count;
+                cin.ignore();
+
+                if (count > MaxAnswers) { count = MaxAnswers; } //if the count is more than the max answers
+
+                answerCounts[questionCount] = count; //to store the number of answers for this question
+
+                for (int i = 0; i < count; i++) {//to input all the correct answers thah we wanted
+
+                    cout << "Correct answer number " << i + 1 << " is :";
+                    getline(cin, answers[questionCount][i]); 
                 }
+            
+            }else if (YESorNO == "No" || YESorNO == "no" || YESorNO == "N" || YESorNO == "n") {
 
-                answerCounts[questionCount] = count;
+                cout << "Ok, now enter your answer to the question:" << endl;
+                getline(cin, answers[questionCount][0]); //input only one correct answer
 
-                for (int i = 0; i < count; i++) {
-                    std::cout << "Correct answer number " << i + 1 << " is :";
-                    std::getline(std::cin, answers[questionCount][i]);
-                }
+                answerCounts[questionCount] = 1; //set the answer count to 1
+
+            }else{
+           
+                cout << "It seems you didn't typed that right" << "\n";
+                continue; // to skip the rest of the current loop iteration and move on to the next one
+
             }
-            else if (YESorNO == "No" || YESorNO == "no" || YESorNO == "N" || YESorNO == "n") {
-                std::cout << "Ok, now enter your answer to the question:" << std::endl;
-                std::getline(std::cin, answers[questionCount][0]);
-                answerCounts[questionCount] = 1;
-            }
-            else {
-                std::cout << "It seems you didn't typed that right" << "\n";
-                continue;
-            }
-            questionCount++;
+            questionCount++; //count 1+ to the question count
         }
-    }
-    else {
-        std::cout << "You have reached the maximum number of tests!" << std::endl;
-    }
+
+    } else { cout << "You have reached the maximum number of tests!" << endl; }
+   
 }
