@@ -2,68 +2,82 @@
 #include "QuizData.h"
 #include "CalculatePercent.h"
 #include <iostream>
+#include <fstream> // Include the fstream library for file handling
 
 using namespace std;
 
 void TakeQuiz() {
+    // Load test names from tests.txt
+    ifstream testsFile("tests.txt");
+    if (!testsFile.is_open()) {
+        cout << "No tests available.\n";
+        return;
+    }
 
+    // Display available tests
+    cout << "\nAvailable Tests:\n";
+    string testName;
+    int testNumber = 0;
+    while (getline(testsFile, testName)) {
+        cout << ++testNumber << ". " << testName << endl;
+    }
+    testsFile.close();
 
-    if (testCounts > 0) {//chek if there's a test
+    if (testNumber == 0) {
+        cout << "No tests available.\n";
+        return;
+    }
 
-        cout << "\nSelect a Test:\n";
+    // Prompt the user to enter the name of the test
+    string selectedTestName;
+    cout << "Enter the name of the test you want to take: ";
+    getline(cin, selectedTestName);
 
-        //shows the created tests
-        for (int i = 0; i < testCounts; i++) {
-            cout << i + 1 << ". " << testNames[i] << endl;
+    // Open the selected test file
+    ifstream inFile(selectedTestName + ".txt");
+    if (inFile.is_open()) {
+        // Load the test data
+        inFile >> questionCount; // Load the number of questions
+        inFile.ignore(); // Ignore the newline character
+
+        for (int i = 0; i < questionCount; i++) {
+            getline(inFile, questions[i]); // Load the question
+            inFile >> answerCounts[i]; // Load the number of answers
+            inFile.ignore(); // Ignore the newline character
+            for (int j = 0; j < answerCounts[i]; j++) {
+                getline(inFile, answers[i][j]); // Load each answer
+            }
         }
+        inFile.close();
 
-        int testChoice;
-        cout << "Enter the test number: ";
-        cin >> testChoice;
-        cin.ignore();
+        // Take the quiz
+        int score = 0;
+        for (int i = 0; i < questionCount; i++) {
+            cout << "\nQuestion " << i + 1 << ": " << questions[i] << endl;
+            string userAnswer;
+            cout << "Your answer: ";
+            getline(cin, userAnswer);
 
-        //this makes sure that the test number testChoice exists within available tests
-        if (testChoice >= 1 && testChoice <= testCounts) {
-            int selectedTestIndex = testChoice - 1; //get the index of the selected test, since the indexes start from 0 not 1
-
-
-            int score = 0;
-
-            //runs the test
-            for (int i = 0; i < questionCount; i++) {
-
-                cout << "\nQuestion " << i + 1 << ": " << questions[i] << endl;
-
-                string userAnswer;
-
-                cout << "Your answer: ";
-                getline(cin, userAnswer);
-
-                
-                bool correct = false;
-
-                for (int j = 0; j < answerCounts[i]; j++) {
-
-                    if (userAnswer == answers[i][j]) {//check if the answer is correct
-                        correct = true;
-                        break; 
-                    }
-
-                } if (correct) {
-               
-                    cout << "Correct!\n";
-                    score++;
-
-                } else {
-                  cout << "Incorrect.\n"; 
+            bool correct = false;
+            for (int j = 0; j < answerCounts[i]; j++) {
+                if (userAnswer == answers[i][j]) { // Check if the answer is correct
+                    correct = true;
+                    break;
                 }
             }
 
-          
-            cout << "\nYour score: " << score << " out of " << questionCount << "\n Your have "<<percent(score, questionCount)<<"%\n";
-
+            if (correct) {
+                cout << "Correct!\n";
+                score++;
+            }
+            else {
+                cout << "Incorrect.\n";
+            }
         }
-        else { cout << "Invalid test number.\n"; }
+
+        cout << "\nYour score: " << score << " out of " << questionCount << "\n You have " << percent(score, questionCount) << "%\n";
     }
-    else { cout << "No tests available.\n"; }
+    else {
+        cout << "Error: Unable to open the test file.\n";
+    }
 }
