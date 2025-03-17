@@ -3,100 +3,116 @@
 #include <iostream>
 #include <fstream>
 
+
 using namespace std;
 
 void CreateQuiz() {
+
+
     if (testCounts < MaxTests) {
+
+
         string testName;
 
         while (true) {
-            cout << "Enter a name for the test :";
+
+            cout << "Enter a name for the test: ";
             getline(cin, testName);
 
-            // Check if the input is not empty or just spaces
+
+            //this is to check if the input is not empty or just spaces
             if (testName.empty() || testName.find_first_not_of(' ') == string::npos) {
+//testName.empty() checks if the testName string is empty
+//testName.find_first_not_of(' ') == string::npos check the test name if has no characters other than spaces (find_first_not_of returns npos if no non-space character is found)
                 cout << "Invalid test name. Please enter a valid name.\n";
             }
             else {
-                break;
+                // Check if a test with this name already exists
+                ifstream testFile(testName + ".txt");
+                if (testFile.good()) {
+                    cout << "A test with this name already exists. Please choose a different name.\n";
+                    testFile.close();
+                }
+                else {
+                    break; // Name is valid and unique
+                }
             }
         }
 
-        testNames[testCounts] = testName; //store the test name
-        testCounts++; //increment the test count
-        questionCount = 0; //reset the question count
+        testNames[testCounts] = testName; // Store the test name
+        testCounts++; // Increment the test count
+        questionCount = 0; // Reset the question count
 
         string input;
 
         while (questionCount < MaxQuestions) {
-            cout << "Question number " << questionCount + 1 << " or 'done' to finish  :";
+            cout << "Question number " << questionCount + 1 << " or 'done'(d) to finish: ";
             getline(cin, input);
 
-            if (input == "done") { break; }
+            if (input == "done" || input == "d") { break; } // Stop if the user types 'done'
 
-            questions[questionCount] = input;
+            questions[questionCount] = input; // Store the question
 
-            string YESorNO;
-            cout << "Do you want it to have multiple answers? Yes(y) or No(n)?\n";
-            cin >> YESorNO;
-            cin.ignore();
+            // Add answers
+            int count = 0; // Counter for the number of answers
+            while (count < MaxAnswers) {
+                cout << "Enter correct answer " << count + 1 << " or 'done'(d) to finish: ";
+                string answer;
+                getline(cin, answer);
 
-            if (YESorNO == "Yes" || YESorNO == "yes" || YESorNO == "Y" || YESorNO == "y") {
-                cout << "How many correct answers do you want it to have? (Max " << MaxAnswers << ")\n";
-                int count;
-                cin >> count;
-                cin.ignore();
+                if (answer == "done" || answer == "d") { break; } // Stop if the user types 'done'
 
-                if (count > MaxAnswers) { count = MaxAnswers; }
-
-                answerCounts[questionCount] = count;
-
-                for (int i = 0; i < count; i++) {
-                    cout << "Correct answer number " << i + 1 << " is :";
-                    getline(cin, answers[questionCount][i]);
-                }
+                answers[questionCount][count] = answer; // Store the answer
+                count++; // Increment the answer count
             }
-            else if (YESorNO == "No" || YESorNO == "no" || YESorNO == "N" || YESorNO == "n") {
-                cout << "Ok, now enter your answer to the question :" << endl;
-                getline(cin, answers[questionCount][0]);
-                answerCounts[questionCount] = 1;
-            }
-            else {
-                cout << "It seems you didn't type that right" << "\n";
-                continue;
-            }
-            questionCount++;
+            answerCounts[questionCount] = count; // Store the number of answers
+            questionCount++; // Move to the next question
         }
 
-        // Save the test to a file
+        //to save the test to new a file
         ofstream outFile(testName + ".txt");
+
         if (outFile.is_open()) {
-            outFile << questionCount << "\n";
+            outFile << questionCount << "\n"; // Save the number of questions
             for (int i = 0; i < questionCount; i++) {
-                outFile << questions[i] << "\n";
-                outFile << answerCounts[i] << "\n";
+                outFile << questions[i] << "\n"; // Save the question
+                outFile << answerCounts[i] << "\n"; // Save the number of answers
                 for (int j = 0; j < answerCounts[i]; j++) {
-                    outFile << answers[i][j] << "\n";
+                    outFile << answers[i][j] << "\n"; // Save each answer
                 }
             }
             outFile.close();
             cout << "Test saved to " << testName << ".txt\n";
 
-            // Save the test name to tests.txt
-            ofstream testsFile("tests.txt", ios::app);
-            if (testsFile.is_open()) {
-                testsFile << testName << "\n";
-                testsFile.close();
+
+            //saves the test name to tests.txt
+            ofstream testsFile("tests.txt", ios::app);//ios::app so it dosen't delete every time it is closed
+
+            if (testsFile.is_open()) {//checks if the file was opened
+
+                testsFile << testName << "\n"; //saves the test name
+
+                testsFile.close();//closes file
+            
             }
             else {
-                cout << "Error: Unable to save the test name to tests.txt.\n";
+                cout << "Error: Unable to save the test name to tests.txt.\n"; 
             }
+
+
+        
         }
         else {
-            cout << "Error: Unable to save the test to a file.\n";
+            cout << "Error: Unable to save the test to a file.\n"; 
         }
+
+
+    
     }
     else {
-        cout << "You have reached the maximum number of tests!!" << endl;
+        cout << "You have reached the maximum number of tests!!\n"; 
     }
+
+
+
 }

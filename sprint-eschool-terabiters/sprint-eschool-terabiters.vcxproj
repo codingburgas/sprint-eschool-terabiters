@@ -129,6 +129,8 @@
   <ItemGroup>
     <ClCompile Include="CalculatePercent.cpp" />
     <ClCompile Include="CreateQuiz.cpp" />
+    <ClCompile Include="DeleteQuiz.cpp" />
+    <ClCompile Include="EditQuiz.cpp" />
     <ClCompile Include="QuizMenu.cpp" />
     <ClCompile Include="sprint-eschool-terabiters.cpp" />
     <ClCompile Include="TakeQuiz.cpp" />
@@ -136,6 +138,8 @@
   <ItemGroup>
     <ClInclude Include="CalculatePercent.h" />
     <ClInclude Include="CreateQuiz.h" />
+    <ClInclude Include="DeleteQuiz.h" />
+    <ClInclude Include="EditQuiz.h" />
     <ClInclude Include="QuizData.h" />
     <ClInclude Include="QuizMenu.h" />
     <ClInclude Include="TakeQuiz.h" />

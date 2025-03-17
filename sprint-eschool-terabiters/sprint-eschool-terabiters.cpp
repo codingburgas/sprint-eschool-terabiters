@@ -1,38 +1,41 @@
 #include <iostream>
+#include <fstream>
 #include "QuizMenu.h"
 #include "CreateQuiz.h"
 #include "TakeQuiz.h"
+#include "EditQuiz.h"   
+#include "DeleteQuiz.h" 
 #include "QuizData.h"
 
 using namespace std;
 
-string questions[MaxQuestions]; //to store questions
-string answers[MaxQuestions][MaxAnswers]; //to store answers
-int answerCounts[MaxQuestions]; //to store the number of answers per question
-int questionCount = 0; //for the number of questions in a test
+string questions[MaxQuestions];
+string answers[MaxQuestions][MaxAnswers];
+int answerCounts[MaxQuestions];
+int questionCount = 0;
 
 string testNames[MaxTests];
-int testCounts = 0; //for the number of tests
+int testCounts = 0;
 
 int main() {
+    // Load existing tests on startup
+    ifstream testsFile("tests.txt"); 
+    if (testsFile.is_open()) {       
+        while (getline(testsFile, testNames[testCounts]) && testCounts < MaxTests) {
+            testCounts++;
+        }
+        testsFile.close();
+    }                              
+
     while (true) {
         int choice = Quiz_Menu();
         switch (choice) {
-        case 1: { //Create Quiz option
-            CreateQuiz();
-            break;
-        }
-        case 2: { //Take Quiz option
-            TakeQuiz();
-            break;
-        }
-        case 3: { //Exit option
-            return 0; //exit the program
-        }
-        default: {
-            cout << "Invalid choice. Try again.\n";
-            break;
-        }
+        case 1: CreateQuiz(); break;
+        case 2: TakeQuiz(); break;
+        case 3: EditQuiz(); break; 
+        case 4: DeleteQuiz(); break; 
+        case 5: return 0;
+        default: cout << "Invalid choice. Try again.\n";
         }
     }
 }
