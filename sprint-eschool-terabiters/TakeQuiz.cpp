@@ -2,13 +2,14 @@
 #include "QuizData.h"
 #include "CalculatePercent.h"
 #include <iostream>
-#include <fstream> // Include the fstream library for file handling
+#include <fstream>
 
 using namespace std;
 
 void TakeQuiz() {
     // Load test names from tests.txt
     ifstream testsFile("tests.txt");
+
     if (!testsFile.is_open()) {
         cout << "No tests available.\n";
         return;
@@ -19,6 +20,11 @@ void TakeQuiz() {
     string testName;
     int testNumber = 0;
     while (getline(testsFile, testName)) {
+        // Skip empty or whitespace-only test names
+        if (testName.empty() || testName.find_first_not_of(' ') == string::npos) {
+            continue; // Skip this test name
+        }
+
         cout << ++testNumber << ". " << testName << endl;
     }
     testsFile.close();
@@ -30,8 +36,18 @@ void TakeQuiz() {
 
     // Prompt the user to enter the name of the test
     string selectedTestName;
-    cout << "Enter the name of the test you want to take: ";
-    getline(cin, selectedTestName);
+    while (true) {
+        cout << "Enter the name of the test you want to take: ";
+        getline(cin, selectedTestName);
+
+        // Check if the input is not empty or just spaces
+        if (selectedTestName.empty() || selectedTestName.find_first_not_of(' ') == string::npos) {
+            cout << "Invalid test name. Please enter a valid name.\n";
+        }
+        else {
+            break;
+        }
+    }
 
     // Open the selected test file
     ifstream inFile(selectedTestName + ".txt");
@@ -75,7 +91,7 @@ void TakeQuiz() {
             }
         }
 
-        cout << "\nYour score: " << score << " out of " << questionCount << "\n You have " << percent(score, questionCount) << "%\n";
+        cout << "\nYour score: " << score << " out of " << questionCount << "\nYou have " << percent(score, questionCount) << "%\n";
     }
     else {
         cout << "Error: Unable to open the test file.\n";

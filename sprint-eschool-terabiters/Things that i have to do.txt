@@ -1,0 +1,10 @@
+2
+handle non numberic input
+1
+yes
+Make a menu for editing the tests
+1
+yes
+To see the answers when I'm done with a test 
+1
+yes
