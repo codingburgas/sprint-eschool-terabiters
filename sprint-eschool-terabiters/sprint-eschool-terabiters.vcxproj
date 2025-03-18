@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="CalculatePercent.cpp" />
     <ClCompile Include="CreateQuiz.cpp" />
+    <ClCompile Include="CreateQuiz_RAYLIB.cpp" />
     <ClCompile Include="DeleteQuiz.cpp" />
     <ClCompile Include="EditQuiz.cpp" />
     <ClCompile Include="QuizMenu.cpp" />

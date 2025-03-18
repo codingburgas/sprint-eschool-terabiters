@@ -1,118 +1,188 @@
 #include "CreateQuiz.h"
 #include "QuizData.h"
-#include <iostream>
+#include "raylib.h"
 #include <fstream>
-
+#include <string>
 
 using namespace std;
 
-void CreateQuiz() {
+enum CreateQuizState {
+    ENTER_TEST_NAME,
+    ENTER_QUESTION,
+    ENTER_ANSWER,
+    SAVING
+};
 
+string TextInputBox(Rectangle bounds, const char* prompt, string& input, bool active) {
+    static double lastBackspace = 0.0;
 
-    if (testCounts < MaxTests) {
-
-
-        string testName;
-
-        while (true) {
-
-            cout << "Enter a name for the test: ";
-            getline(cin, testName);
-
-
-            //this is to check if the input is not empty or just spaces
-            if (testName.empty() || testName.find_first_not_of(' ') == string::npos) {
-//testName.empty() checks if the testName string is empty
-//testName.find_first_not_of(' ') == string::npos check the test name if has no characters other than spaces (find_first_not_of returns npos if no non-space character is found)
-                cout << "Invalid test name. Please enter a valid name.\n";
+    if (active) {
+        int key = GetCharPressed();
+        while (key > 0) {
+            if ((key >= 32) && (key <= 125)) {
+                input += static_cast<char>(key);
             }
-            else {
-                // Check if a test with this name already exists
-                ifstream testFile(testName + ".txt");
-                if (testFile.good()) {
-                    cout << "A test with this name already exists. Please choose a different name.\n";
-                    testFile.close();
+            key = GetCharPressed();
+        }
+
+        if (IsKeyDown(KEY_BACKSPACE)) {
+            double currentTime = GetTime();
+            if (currentTime - lastBackspace > 0.08 || IsKeyPressed(KEY_BACKSPACE)) {
+                if (!input.empty()) input.pop_back();
+                lastBackspace = currentTime;
+            }
+        }
+    }
+
+    DrawRectangleRec(bounds, LIGHTGRAY);
+    DrawText(prompt, bounds.x + 10, bounds.y - 30, 20, DARKGRAY);
+    DrawText(input.c_str(), bounds.x + 10, bounds.y + 10, 20, DARKGRAY);
+
+    if (active && (int)(GetTime() * 2.0) % 2) {
+        int textWidth = MeasureText(input.c_str(), 20);
+        DrawRectangle(bounds.x + 14 + textWidth, bounds.y + 12, 2, 20, DARKGRAY);
+    }
+
+    return input;
+}
+
+void CreateQuiz() {
+    if (testCounts >= MaxTests) {
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        DrawText("Maximum tests reached!", 100, 100, 30, RED);
+        EndDrawing();
+        WaitTime(2);
+        return;
+    }
+
+    CreateQuizState state = ENTER_TEST_NAME;
+    string testName;
+    string currentQuestion;
+    string currentAnswer;
+    int currentAnswerCount = 0;
+    bool nameValid = false;
+    bool hasSaved = false;
+
+    while (!WindowShouldClose()) {
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        // Always show test name header when in creation flow
+        if (state != ENTER_TEST_NAME) {
+            DrawText(TextFormat("Creating: %s", testName.c_str()), 10, 10, 20, DARKBLUE);
+        }
+
+        switch (state) {
+        case ENTER_TEST_NAME: {
+            Rectangle nameBox = { 100, 200, 600, 40 };
+            testName = TextInputBox(nameBox, "Enter test name:", testName, true);
+
+            if (IsKeyPressed(KEY_ENTER)) {
+                nameValid = !testName.empty() &&
+                    (testName.find_first_not_of(' ') != string::npos) &&
+                    (!ifstream(testName + ".txt").good());
+
+                if (nameValid) {
+                    testNames[testCounts] = testName;
+                    testCounts++;
+                    questionCount = 0;
+                    state = ENTER_QUESTION;
                 }
                 else {
-                    break; // Name is valid and unique
+                    DrawText("Invalid or existing name!", 100, 250, 20, RED);
                 }
             }
+            break;
         }
 
-        testNames[testCounts] = testName; // Store the test name
-        testCounts++; // Increment the test count
-        questionCount = 0; // Reset the question count
+        case ENTER_QUESTION: {
+            // Header shows test name + question progress
+            DrawText(TextFormat("Test: %s", testName.c_str()), 100, 70, 30, DARKGRAY);
+            DrawText(TextFormat("Question %d/%d", questionCount + 1, MaxQuestions), 100, 110, 20, GRAY);
 
-        string input;
+            Rectangle questionBox = { 100, 200, 600, 40 };
+            currentQuestion = TextInputBox(questionBox, "Enter question (or 'done'):", currentQuestion, true);
 
-        while (questionCount < MaxQuestions) {
-            cout << "Question number " << questionCount + 1 << " or 'done'(d) to finish: ";
-            getline(cin, input);
-
-            if (input == "done" || input == "d") { break; } // Stop if the user types 'done'
-
-            questions[questionCount] = input; // Store the question
-
-            // Add answers
-            int count = 0; // Counter for the number of answers
-            while (count < MaxAnswers) {
-                cout << "Enter correct answer " << count + 1 << " or 'done'(d) to finish: ";
-                string answer;
-                getline(cin, answer);
-
-                if (answer == "done" || answer == "d") { break; } // Stop if the user types 'done'
-
-                answers[questionCount][count] = answer; // Store the answer
-                count++; // Increment the answer count
-            }
-            answerCounts[questionCount] = count; // Store the number of answers
-            questionCount++; // Move to the next question
-        }
-
-        //to save the test to new a file
-        ofstream outFile(testName + ".txt");
-
-        if (outFile.is_open()) {
-            outFile << questionCount << "\n"; // Save the number of questions
-            for (int i = 0; i < questionCount; i++) {
-                outFile << questions[i] << "\n"; // Save the question
-                outFile << answerCounts[i] << "\n"; // Save the number of answers
-                for (int j = 0; j < answerCounts[i]; j++) {
-                    outFile << answers[i][j] << "\n"; // Save each answer
+            if (IsKeyPressed(KEY_ENTER)) {
+                if (currentQuestion == "done" || currentQuestion == "d") {
+                    state = SAVING;
+                }
+                else {
+                    questions[questionCount] = currentQuestion;
+                    currentAnswerCount = 0;
+                    state = ENTER_ANSWER;
+                    currentQuestion.clear();
                 }
             }
-            outFile.close();
-            cout << "Test saved to " << testName << ".txt\n";
-
-
-            //saves the test name to tests.txt
-            ofstream testsFile("tests.txt", ios::app);//ios::app so it dosen't delete every time it is closed
-
-            if (testsFile.is_open()) {//checks if the file was opened
-
-                testsFile << testName << "\n"; //saves the test name
-
-                testsFile.close();//closes file
-            
-            }
-            else {
-                cout << "Error: Unable to save the test name to tests.txt.\n"; 
-            }
-
-
-        
-        }
-        else {
-            cout << "Error: Unable to save the test to a file.\n"; 
+            break;
         }
 
+        case ENTER_ANSWER: {
+            // Persistent test name + question info
+            DrawText(TextFormat("Test: %s", testName.c_str()), 100, 70, 30, DARKGRAY);
+            DrawText(TextFormat("Question %d: %s", questionCount + 1, questions[questionCount].c_str()),
+                100, 110, 20, DARKGRAY);
+            DrawText(TextFormat("Answer %d/%d", currentAnswerCount + 1, MaxAnswers), 100, 140, 20, GRAY);
 
-    
+            Rectangle answerBox = { 100, 200, 600, 40 };
+            currentAnswer = TextInputBox(answerBox, "Enter answer (or 'done'):", currentAnswer, true);
+
+            if (IsKeyPressed(KEY_ENTER)) {
+                if (currentAnswer == "done" || currentAnswer == "d") {
+                    answerCounts[questionCount] = currentAnswerCount;
+                    questionCount++;
+                    state = ENTER_QUESTION;
+                    currentAnswer.clear();
+                }
+                else {
+                    answers[questionCount][currentAnswerCount] = currentAnswer;
+                    currentAnswerCount++;
+                    currentAnswer.clear();
+                }
+            }
+            break;
+        }
+
+        case SAVING: {
+            // Show test name during saving
+            DrawText(TextFormat("Saving: %s", testName.c_str()), 100, 150, 30, DARKGRAY);
+
+            if (!hasSaved) {
+                ofstream outFile(testName + ".txt");
+                if (outFile.is_open()) {
+                    outFile << questionCount << "\n";
+                    for (int i = 0; i < questionCount; i++) {
+                        outFile << questions[i] << "\n";
+                        outFile << answerCounts[i] << "\n";
+                        for (int j = 0; j < answerCounts[i]; j++) {
+                            outFile << answers[i][j] << "\n";
+                        }
+                    }
+                    outFile.close();
+
+                    ofstream testsFile("tests.txt", ios::app);
+                    if (testsFile.is_open()) {
+                        testsFile << testName << "\n";
+                        testsFile.close();
+                        hasSaved = true;
+                        DrawText("Test saved successfully!", 100, 200, 30, GREEN);
+                    }
+                    else {
+                        DrawText("Error saving test list!", 100, 200, 30, RED);
+                    }
+                }
+                else {
+                    DrawText("Error saving test content!", 100, 200, 30, RED);
+                }
+                hasSaved = true;
+            }
+
+            if (IsKeyPressed(KEY_ENTER)) return;
+            break;
+        }
+        }
+
+        EndDrawing();
     }
-    else {
-        cout << "You have reached the maximum number of tests!!\n"; 
-    }
-
-
-
 }

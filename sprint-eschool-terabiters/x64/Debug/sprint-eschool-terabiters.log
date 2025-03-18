@@ -1,4 +1,10 @@
-﻿  QuizMenu.cpp
-  sprint-eschool-terabiters.vcxproj -> C:\Users\damya\OneDrive\Desktop\FUCK YOU ALL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\sprint-eschool-terabiters\x64\Debug\sprint-eschool-terabiters.exe
+﻿  CreateQuiz.cpp
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(38,46): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(38,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(39,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(39,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(43,59): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(43,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  sprint-eschool-terabiters.vcxproj -> C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\x64\Debug\sprint-eschool-terabiters.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.
