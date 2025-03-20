@@ -1,10 +1,25 @@
 ﻿  CreateQuiz.cpp
-C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(38,46): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(38,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(39,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(39,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(43,59): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(43,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(36,20): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(46,51): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(46,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(47,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(47,44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(51,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(51,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(92,51): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(92,51): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(92,75): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(92,75): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(110,76): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(110,62): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(121,55): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(121,55): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(121,79): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(121,79): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(149,53): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(149,53): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(149,77): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\sprint-eschool-terabiters\CreateQuiz.cpp(149,77): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   sprint-eschool-terabiters.vcxproj -> C:\Users\damya\OneDrive\Desktop\project\sprint-eschool-terabiters\x64\Debug\sprint-eschool-terabiters.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

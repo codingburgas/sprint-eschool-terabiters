@@ -1,59 +1,67 @@
 #include "QuizMenu.h"
 #include "raylib.h"
 
-// Configuration
-const int screenWidth = 800;
-const int screenHeight = 600;
-const int buttonWidth = 200;
-const int buttonHeight = 40;
-const int buttonSpacing = 20;
-
-bool CheckButton(Rectangle bounds, const char* text) {
-    // Draw button
-    DrawRectangleRec(bounds, LIGHTGRAY);
-    DrawText(text,
-        bounds.x + bounds.width / 2 - MeasureText(text, 20) / 2,
-        bounds.y + 10,
-        20, DARKGRAY);
-
-    // Check click
-    return IsMouseButtonReleased(MOUSE_LEFT_BUTTON) &&
-        CheckCollisionPointRec(GetMousePosition(), bounds);
-}
-
 int Quiz_Menu() {
-    InitWindow(screenWidth, screenHeight, "Quiz Manager");
-    SetTargetFPS(60);
-
+    const int buttonWidth = 400;
+    const int buttonHeight = 60;
+    const int buttonSpacing = 20;
     int choice = 0;
-    const int startY = (screenHeight - (5 * (buttonHeight + buttonSpacing))) / 2;
+
+    int screenWidth = GetScreenWidth();
+    int screenHeight = GetScreenHeight();
+    int startY = (screenHeight - (5 * (buttonHeight + buttonSpacing))) / 2;
+
+    Rectangle options[5] = {
+        {(screenWidth - buttonWidth) / 2.0f, startY + 0 * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight},
+        {(screenWidth - buttonWidth) / 2.0f, startY + 1 * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight},
+        {(screenWidth - buttonWidth) / 2.0f, startY + 2 * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight},
+        {(screenWidth - buttonWidth) / 2.0f, startY + 3 * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight},
+        {(screenWidth - buttonWidth) / 2.0f, startY + 4 * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight}
+    };
+
+    const char* buttonTexts[5] = {
+        "Create Quiz", "Take Quiz",
+        "Edit Quiz", "Delete Quiz", "Exit"
+    };
 
     while (!WindowShouldClose() && choice == 0) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
         // Draw title
-        DrawText("Quiz Manager", screenWidth / 2 - MeasureText("Quiz Manager", 40) / 2, 50, 40, DARKGRAY);
+        DrawText("Quiz Manager",
+            screenWidth / 2 - MeasureText("Quiz Manager", 40) / 2,
+            50, 40, DARKGRAY);
 
-        // Create buttons
-        Rectangle options[5] = {
-            {(screenWidth - buttonWidth) / 2.0f, startY + 0 * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight},
-            {(screenWidth - buttonWidth) / 2.0f, startY + 1 * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight},
-            {(screenWidth - buttonWidth) / 2.0f, startY + 2 * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight},
-            {(screenWidth - buttonWidth) / 2.0f, startY + 3 * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight},
-            {(screenWidth - buttonWidth) / 2.0f, startY + 4 * (buttonHeight + buttonSpacing), buttonWidth, buttonHeight}
-        };
+        // Draw buttons with hover effect
+        for (int i = 0; i < 5; i++) {
+            Color btnColor = CheckCollisionPointRec(GetMousePosition(), options[i]) ?
+                Color{ 200, 200, 200, 255 } : LIGHTGRAY;
 
-        // Check buttons
-        if (CheckButton(options[0], "Create Quiz")) choice = 1;
-        if (CheckButton(options[1], "Take Quiz")) choice = 2;
-        if (CheckButton(options[2], "Edit Quiz")) choice = 3;
-        if (CheckButton(options[3], "Delete Quiz")) choice = 4;
-        if (CheckButton(options[4], "Exit")) choice = 5;
+            DrawRectangleRec(options[i], btnColor);
+            DrawText(buttonTexts[i],
+                options[i].x + options[i].width / 2 - MeasureText(buttonTexts[i], 30) / 2,
+                options[i].y + 15, 30, DARKGRAY);
+        }
+
+        // Check clicks
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            Vector2 mousePos = GetMousePosition();
+            for (int i = 0; i < 5; i++) {
+                if (CheckCollisionPointRec(mousePos, options[i])) {
+                    choice = i + 1;
+                    break;
+                }
+            }
+        }
+
+        // Handle ESC key for closing
+        if (IsKeyPressed(KEY_ESCAPE)) {
+            choice = 5;
+        }
 
         EndDrawing();
     }
 
-    CloseWindow();
     return choice;
 }

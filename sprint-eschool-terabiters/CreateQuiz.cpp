@@ -6,41 +6,49 @@
 
 using namespace std;
 
-enum CreateQuizState {
-    ENTER_TEST_NAME,
-    ENTER_QUESTION,
-    ENTER_ANSWER,
-    SAVING
-};
+enum CreateQuizState { ENTER_TEST_NAME, ENTER_QUESTION, ENTER_ANSWER, SAVING };
 
 string TextInputBox(Rectangle bounds, const char* prompt, string& input, bool active) {
     static double lastBackspace = 0.0;
+    const int fontSize = 20;
+    const int padding = 10;
 
     if (active) {
         int key = GetCharPressed();
         while (key > 0) {
-            if ((key >= 32) && (key <= 125)) {
-                input += static_cast<char>(key);
-            }
+            if ((key >= 32) && (key <= 125)) input += (char)key;
             key = GetCharPressed();
         }
 
         if (IsKeyDown(KEY_BACKSPACE)) {
             double currentTime = GetTime();
-            if (currentTime - lastBackspace > 0.08 || IsKeyPressed(KEY_BACKSPACE)) {
+            if (currentTime - lastBackspace > 0.10) {
                 if (!input.empty()) input.pop_back();
                 lastBackspace = currentTime;
             }
         }
     }
 
-    DrawRectangleRec(bounds, LIGHTGRAY);
-    DrawText(prompt, bounds.x + 10, bounds.y - 30, 20, DARKGRAY);
-    DrawText(input.c_str(), bounds.x + 10, bounds.y + 10, 20, DARKGRAY);
+    // Text truncation
+    string displayText = input;
+    float maxWidth = bounds.width - 2 * padding;
+    if (MeasureText(displayText.c_str(), fontSize) > maxWidth) {
+        for (int i = input.length(); i > 0; i--) {
+            string temp = "..." + input.substr(input.length() - i);
+            if (MeasureText(temp.c_str(), fontSize) <= maxWidth) {
+                displayText = temp;
+                break;
+            }
+        }
+    }
 
-    if (active && (int)(GetTime() * 2.0) % 2) {
-        int textWidth = MeasureText(input.c_str(), 20);
-        DrawRectangle(bounds.x + 14 + textWidth, bounds.y + 12, 2, 20, DARKGRAY);
+    DrawRectangleRec(bounds,  LIGHTGRAY);
+    DrawText(prompt, bounds.x + padding, bounds.y - 30, fontSize, DARKGRAY);
+    DrawText(displayText.c_str(), bounds.x + padding, bounds.y + padding, fontSize, DARKGRAY);
+
+    if (active && (int)(GetTime() * 2) % 2) {
+        int textWidth = MeasureText(displayText.c_str(), fontSize);
+        DrawRectangle(bounds.x + padding + textWidth, bounds.y + padding + 2, 2, fontSize - 4, DARKGRAY);
     }
 
     return input;
@@ -50,7 +58,9 @@ void CreateQuiz() {
     if (testCounts >= MaxTests) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawText("Maximum tests reached!", 100, 100, 30, RED);
+        DrawText("Maximum tests reached!",
+            GetScreenWidth() / 2 - MeasureText("Maximum tests reached!", 30) / 2,
+            GetScreenHeight() / 2 - 15, 30, RED);
         EndDrawing();
         WaitTime(2);
         return;
@@ -63,19 +73,23 @@ void CreateQuiz() {
     int currentAnswerCount = 0;
     bool nameValid = false;
     bool hasSaved = false;
+    double saveCompleteTime = 0;
+    double invalidNameTime = -1;
+
+    int screenWidth = GetScreenWidth();
+    int screenHeight = GetScreenHeight();
 
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        // Always show test name header when in creation flow
         if (state != ENTER_TEST_NAME) {
-            DrawText(TextFormat("Creating: %s", testName.c_str()), 10, 10, 20, DARKBLUE);
+            DrawText(TextFormat("Creating: %s", testName.c_str()), 20, 20, 20, DARKBLUE);
         }
 
         switch (state) {
         case ENTER_TEST_NAME: {
-            Rectangle nameBox = { 100, 200, 600, 40 };
+            Rectangle nameBox = { screenWidth / 2 - 300, screenHeight / 2 - 20, 600, 40 };
             testName = TextInputBox(nameBox, "Enter test name:", testName, true);
 
             if (IsKeyPressed(KEY_ENTER)) {
@@ -84,25 +98,28 @@ void CreateQuiz() {
                     (!ifstream(testName + ".txt").good());
 
                 if (nameValid) {
-                    testNames[testCounts] = testName;
-                    testCounts++;
+                    testNames[testCounts++] = testName;
                     questionCount = 0;
                     state = ENTER_QUESTION;
+                    invalidNameTime = -1;
                 }
-                else {
-                    DrawText("Invalid or existing name!", 100, 250, 20, RED);
-                }
+                else invalidNameTime = GetTime();
+            }
+
+            if (invalidNameTime > 0 && GetTime() - invalidNameTime < 3) {
+                DrawText("Invalid or existing name!", nameBox.x, nameBox.y + 50, 20, RED);
             }
             break;
         }
 
         case ENTER_QUESTION: {
-            // Header shows test name + question progress
-            DrawText(TextFormat("Test: %s", testName.c_str()), 100, 70, 30, DARKGRAY);
-            DrawText(TextFormat("Question %d/%d", questionCount + 1, MaxQuestions), 100, 110, 20, GRAY);
+            char header[50];
+            snprintf(header, 50, "Question %d/%d", questionCount + 1, MaxQuestions);
+            int textWidth = MeasureText(header, 20);
+            DrawText(header, (screenWidth - textWidth) / 2, 100, 20, DARKGRAY);
 
-            Rectangle questionBox = { 100, 200, 600, 40 };
-            currentQuestion = TextInputBox(questionBox, "Enter question (or 'done'):", currentQuestion, true);
+            Rectangle questionBox = { screenWidth / 2 - 300, screenHeight / 2 - 20, 600, 40 };
+            currentQuestion = TextInputBox(questionBox, "Enter question or 'done(d)':", currentQuestion, true);
 
             if (IsKeyPressed(KEY_ENTER)) {
                 if (currentQuestion == "done" || currentQuestion == "d") {
@@ -119,14 +136,18 @@ void CreateQuiz() {
         }
 
         case ENTER_ANSWER: {
-            // Persistent test name + question info
-            DrawText(TextFormat("Test: %s", testName.c_str()), 100, 70, 30, DARKGRAY);
-            DrawText(TextFormat("Question %d: %s", questionCount + 1, questions[questionCount].c_str()),
-                100, 110, 20, DARKGRAY);
-            DrawText(TextFormat("Answer %d/%d", currentAnswerCount + 1, MaxAnswers), 100, 140, 20, GRAY);
+            char questionInfo[100];
+            snprintf(questionInfo, 100, "Question %d: %s", questionCount + 1, questions[questionCount].c_str());
+            int qWidth = MeasureText(questionInfo, 20);
+            DrawText(questionInfo, (screenWidth - qWidth) / 2, 100, 20, DARKGRAY);
 
-            Rectangle answerBox = { 100, 200, 600, 40 };
-            currentAnswer = TextInputBox(answerBox, "Enter answer (or 'done'):", currentAnswer, true);
+            char answerInfo[50];
+            snprintf(answerInfo, 50, "Answer %d/%d", currentAnswerCount + 1, MaxAnswers);
+            int aWidth = MeasureText(answerInfo, 20);
+            DrawText(answerInfo, (screenWidth - aWidth) / 2, 140, 20, DARKGRAY);
+
+            Rectangle answerBox = { screenWidth / 2 - 300, screenHeight / 2 - 20, 600, 40 };
+            currentAnswer = TextInputBox(answerBox, "Enter answeror or 'done(d)':", currentAnswer, true);
 
             if (IsKeyPressed(KEY_ENTER)) {
                 if (currentAnswer == "done" || currentAnswer == "d") {
@@ -136,8 +157,7 @@ void CreateQuiz() {
                     currentAnswer.clear();
                 }
                 else {
-                    answers[questionCount][currentAnswerCount] = currentAnswer;
-                    currentAnswerCount++;
+                    answers[questionCount][currentAnswerCount++] = currentAnswer;
                     currentAnswer.clear();
                 }
             }
@@ -145,44 +165,41 @@ void CreateQuiz() {
         }
 
         case SAVING: {
-            // Show test name during saving
-            DrawText(TextFormat("Saving: %s", testName.c_str()), 100, 150, 30, DARKGRAY);
+            char saveText[100];
+            snprintf(saveText, 100, "Saving %s (%d questions)", testName.c_str(), questionCount);
+            int saveWidth = MeasureText(saveText, 30);
+            DrawText(saveText, (screenWidth - saveWidth) / 2, screenHeight / 2 - 30, 30, DARKGRAY);
 
             if (!hasSaved) {
                 ofstream outFile(testName + ".txt");
-                if (outFile.is_open()) {
+                if (outFile) {
                     outFile << questionCount << "\n";
                     for (int i = 0; i < questionCount; i++) {
-                        outFile << questions[i] << "\n";
-                        outFile << answerCounts[i] << "\n";
-                        for (int j = 0; j < answerCounts[i]; j++) {
+                        outFile << questions[i] << "\n" << answerCounts[i] << "\n";
+                        for (int j = 0; j < answerCounts[i]; j++)
                             outFile << answers[i][j] << "\n";
-                        }
                     }
                     outFile.close();
 
                     ofstream testsFile("tests.txt", ios::app);
-                    if (testsFile.is_open()) {
+                    if (testsFile) {
                         testsFile << testName << "\n";
                         testsFile.close();
                         hasSaved = true;
-                        DrawText("Test saved successfully!", 100, 200, 30, GREEN);
-                    }
-                    else {
-                        DrawText("Error saving test list!", 100, 200, 30, RED);
+                        saveCompleteTime = GetTime();
                     }
                 }
-                else {
-                    DrawText("Error saving test content!", 100, 200, 30, RED);
-                }
-                hasSaved = true;
             }
 
-            if (IsKeyPressed(KEY_ENTER)) return;
+            if (hasSaved) {
+                DrawText("Test saved successfully!",
+                    (screenWidth - MeasureText("Test saved successfully!", 30)) / 2,
+                    screenHeight / 2 + 20, 30, GREEN);
+                if (GetTime() - saveCompleteTime > 1) return;
+            }
             break;
         }
         }
-
         EndDrawing();
     }
 }
