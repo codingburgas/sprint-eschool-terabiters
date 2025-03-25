@@ -12,7 +12,7 @@ void EditQuiz() {
         return;
     }
 
-    // Display available tests
+    //display available tests
     cout << "\nAvailable Tests:\n";
     for (int i = 0; i < testCounts; i++) {
         cout << i + 1 << ". " << testNames[i] << endl;

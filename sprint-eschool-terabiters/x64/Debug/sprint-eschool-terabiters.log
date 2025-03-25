@@ -1,1 +1,13 @@
-﻿  sprint-eschool-terabiters.vcxproj -> C:\Users\damya\OneDrive\Desktop\AnotherOneBitsTheDust\sprint-eschool-terabiters\x64\Debug\sprint-eschool-terabiters.exe
+﻿  CalculatePercent.cpp
+  CreateQuiz.cpp
+C:\Users\damya\OneDrive\Desktop\old old old floder\sprint-eschool-terabiters\sprint-eschool-terabiters\CalculatePercent.cpp(6,19): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  DeleteQuiz.cpp
+  EditQuiz.cpp
+C:\Users\damya\OneDrive\Desktop\old old old floder\sprint-eschool-terabiters\sprint-eschool-terabiters\EditQuiz.cpp(77,42): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  QuizMenu.cpp
+  sprint-eschool-terabiters.cpp
+  TakeQuiz.cpp
+  Generating Code...
+  sprint-eschool-terabiters.vcxproj -> C:\Users\damya\OneDrive\Desktop\old old old floder\sprint-eschool-terabiters\x64\Debug\sprint-eschool-terabiters.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

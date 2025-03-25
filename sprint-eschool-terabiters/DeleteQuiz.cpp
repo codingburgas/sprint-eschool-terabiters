@@ -2,7 +2,7 @@
 #include "QuizData.h"
 #include <iostream>
 #include <fstream>
-#include <cstdio> // For remove()
+
 
 using namespace std;
 
@@ -12,7 +12,7 @@ void DeleteQuiz() {
         return;
     }
 
-    // Display available tests
+    //display available tests
     cout << "\nAvailable Tests:\n";
     for (int i = 0; i < testCounts; i++) {
         cout << i + 1 << ". " << testNames[i] << endl;
@@ -30,13 +30,13 @@ void DeleteQuiz() {
 
     string deletedTest = testNames[testChoice - 1];
 
-    // Remove from array
+    //remove from array
     for (int i = testChoice - 1; i < testCounts - 1; i++) {
         testNames[i] = testNames[i + 1];
     }
     testCounts--;
 
-    // Update tests.txt
+    //update tests.txt
     ofstream outFile("tests.txt");
     if (outFile.is_open()) {
         for (int i = 0; i < testCounts; i++) {
@@ -45,7 +45,7 @@ void DeleteQuiz() {
         outFile.close();
     }
 
-    // Delete file
+    //delete file
     if (remove((deletedTest + ".txt").c_str()) != 0) {
         cout << "Error deleting test file!\n";
     }

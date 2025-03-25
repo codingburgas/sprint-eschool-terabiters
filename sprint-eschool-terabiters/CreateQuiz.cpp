@@ -27,21 +27,25 @@ void CreateQuiz() {
                 cout << "Invalid test name. Please enter a valid name.\n";
             }
             else {
-                // Check if a test with this name already exists
+                //check if a test with this name already exists
                 ifstream testFile(testName + ".txt");
                 if (testFile.good()) {
                     cout << "A test with this name already exists. Please choose a different name.\n";
                     testFile.close();
                 }
                 else {
-                    break; // Name is valid and unique
+                    break; 
                 }
             }
         }
 
-        testNames[testCounts] = testName; // Store the test name
-        testCounts++; // Increment the test count
-        questionCount = 0; // Reset the question count
+        testNames[testCounts] = testName; 
+        testCounts++; 
+        questionCount = 0; //reset question count
+
+
+
+
 
         string input;
 
@@ -49,36 +53,40 @@ void CreateQuiz() {
             cout << "Question number " << questionCount + 1 << " or 'done'(d) to finish: ";
             getline(cin, input);
 
-            if (input == "done" || input == "d") { break; } // Stop if the user types 'done'
+            if (input == "done" || input == "d") { break; } 
 
-            questions[questionCount] = input; // Store the question
+            questions[questionCount] = input; //store the question
 
-            // Add answers
-            int count = 0; // Counter for the number of answers
+
+            //                                                                                |  | |   
+            //Add answers                                                                     V  V V
+            int count = 0; //for the number of answers
+
             while (count < MaxAnswers) {
+
                 cout << "Enter correct answer " << count + 1 << " or 'done'(d) to finish: ";
                 string answer;
                 getline(cin, answer);
 
-                if (answer == "done" || answer == "d") { break; } // Stop if the user types 'done'
+                if (answer == "done" || answer == "d") { break; } 
 
-                answers[questionCount][count] = answer; // Store the answer
-                count++; // Increment the answer count
+                answers[questionCount][count] = answer; //store the answer
+                count++; 
             }
-            answerCounts[questionCount] = count; // Store the number of answers
-            questionCount++; // Move to the next question
+            answerCounts[questionCount] = count; //store number of answers
+            questionCount++; //move to next question
         }
 
         //to save the test to new a file
         ofstream outFile(testName + ".txt");
 
         if (outFile.is_open()) {
-            outFile << questionCount << "\n"; // Save the number of questions
+            outFile << questionCount << "\n"; //save the number of questions
             for (int i = 0; i < questionCount; i++) {
-                outFile << questions[i] << "\n"; // Save the question
-                outFile << answerCounts[i] << "\n"; // Save the number of answers
+                outFile << questions[i] << "\n"; //save the question
+                outFile << answerCounts[i] << "\n"; //save the number of answers
                 for (int j = 0; j < answerCounts[i]; j++) {
-                    outFile << answers[i][j] << "\n"; // Save each answer
+                    outFile << answers[i][j] << "\n"; //save each answer
                 }
             }
             outFile.close();

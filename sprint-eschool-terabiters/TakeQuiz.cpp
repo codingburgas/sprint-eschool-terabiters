@@ -15,58 +15,55 @@ void TakeQuiz() {
         return;
     }
 
-    // Display available tests
+    // Store tests and display numbered list
+    string testNames[100];
+    int count = 0;
     cout << "\nAvailable Tests:\n";
     string testName;
-    int testNumber = 0;
     while (getline(testsFile, testName)) {
-        // Skip empty or whitespace-only test names
-        if (testName.empty() || testName.find_first_not_of(' ') == string::npos) {
-            continue; // Skip this test name
+        if (testName.empty() || testName.find_first_not_of(' ') == string::npos) continue;
+        if (count < 100) {
+            testNames[count] = testName;
+            cout << (count + 1) << ". " << testName << endl;
+            count++;
         }
-
-        cout << ++testNumber << ". " << testName << endl;
     }
     testsFile.close();
 
-    if (testNumber == 0) {
+    if (count == 0) {
         cout << "No tests available.\n";
         return;
     }
 
-    // Prompt the user to enter the name of the test
-    string selectedTestName;
-    while (true) {
-        cout << "Enter the name of the test you want to take: ";
-        getline(cin, selectedTestName);
+    // Get numeric test selection
+    int testChoice;
+    cout << "Enter the number of the test you want to take: ";
+    cin >> testChoice;
+    cin.ignore();
 
-        // Check if the input is not empty or just spaces
-        if (selectedTestName.empty() || selectedTestName.find_first_not_of(' ') == string::npos) {
-            cout << "Invalid test name. Please enter a valid name.\n";
-        }
-        else {
-            break;
-        }
+    if (testChoice < 1 || testChoice > count) {
+        cout << "Invalid selection.\n";
+        return;
     }
 
-    // Open the selected test file
+    string selectedTestName = testNames[testChoice - 1];
+
+    // Open selected test file (rest remains unchanged)
     ifstream inFile(selectedTestName + ".txt");
     if (inFile.is_open()) {
-        // Load the test data
-        inFile >> questionCount; // Load the number of questions
-        inFile.ignore(); // Ignore the newline character
+        inFile >> questionCount;
+        inFile.ignore();
 
         for (int i = 0; i < questionCount; i++) {
-            getline(inFile, questions[i]); // Load the question
-            inFile >> answerCounts[i]; // Load the number of answers
-            inFile.ignore(); // Ignore the newline character
+            getline(inFile, questions[i]);
+            inFile >> answerCounts[i];
+            inFile.ignore();
             for (int j = 0; j < answerCounts[i]; j++) {
-                getline(inFile, answers[i][j]); // Load each answer
+                getline(inFile, answers[i][j]);
             }
         }
         inFile.close();
 
-        // Take the quiz
         int score = 0;
         for (int i = 0; i < questionCount; i++) {
             cout << "\nQuestion " << i + 1 << ": " << questions[i] << endl;
@@ -76,7 +73,7 @@ void TakeQuiz() {
 
             bool correct = false;
             for (int j = 0; j < answerCounts[i]; j++) {
-                if (userAnswer == answers[i][j]) { // Check if the answer is correct
+                if (userAnswer == answers[i][j]) {
                     correct = true;
                     break;
                 }

@@ -28,8 +28,8 @@ int main() {
     }
 
     while (true) {
-        int choice = Quiz_Menu();
-        switch (choice) {
+     
+        switch (Quiz_Menu()) {
         case 1: CreateQuiz(); break;
         case 2: TakeQuiz(); break;
         case 3: EditQuiz(); break;
