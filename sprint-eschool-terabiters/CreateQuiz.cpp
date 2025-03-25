@@ -1,205 +1,118 @@
 #include "CreateQuiz.h"
 #include "QuizData.h"
-#include "raylib.h"
+#include <iostream>
 #include <fstream>
-#include <string>
+
 
 using namespace std;
 
-enum CreateQuizState { ENTER_TEST_NAME, ENTER_QUESTION, ENTER_ANSWER, SAVING };
-
-string TextInputBox(Rectangle bounds, const char* prompt, string& input, bool active) {
-    static double lastBackspace = 0.0;
-    const int fontSize = 20;
-    const int padding = 10;
-
-    if (active) {
-        int key = GetCharPressed();
-        while (key > 0) {
-            if ((key >= 32) && (key <= 125)) input += (char)key;
-            key = GetCharPressed();
-        }
-
-        if (IsKeyDown(KEY_BACKSPACE)) {
-            double currentTime = GetTime();
-            if (currentTime - lastBackspace > 0.10) {
-                if (!input.empty()) input.pop_back();
-                lastBackspace = currentTime;
-            }
-        }
-    }
-
-    // Text truncation
-    string displayText = input;
-    float maxWidth = bounds.width - 2 * padding;
-    if (MeasureText(displayText.c_str(), fontSize) > maxWidth) {
-        for (int i = input.length(); i > 0; i--) {
-            string temp = "..." + input.substr(input.length() - i);
-            if (MeasureText(temp.c_str(), fontSize) <= maxWidth) {
-                displayText = temp;
-                break;
-            }
-        }
-    }
-
-    DrawRectangleRec(bounds,  LIGHTGRAY);
-    DrawText(prompt, bounds.x + padding, bounds.y - 30, fontSize, DARKGRAY);
-    DrawText(displayText.c_str(), bounds.x + padding, bounds.y + padding, fontSize, DARKGRAY);
-
-    if (active && (int)(GetTime() * 2) % 2) {
-        int textWidth = MeasureText(displayText.c_str(), fontSize);
-        DrawRectangle(bounds.x + padding + textWidth, bounds.y + padding + 2, 2, fontSize - 4, DARKGRAY);
-    }
-
-    return input;
-}
-
 void CreateQuiz() {
-    if (testCounts >= MaxTests) {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        DrawText("Maximum tests reached!",
-            GetScreenWidth() / 2 - MeasureText("Maximum tests reached!", 30) / 2,
-            GetScreenHeight() / 2 - 15, 30, RED);
-        EndDrawing();
-        WaitTime(2);
-        return;
-    }
 
-    CreateQuizState state = ENTER_TEST_NAME;
-    string testName;
-    string currentQuestion;
-    string currentAnswer;
-    int currentAnswerCount = 0;
-    bool nameValid = false;
-    bool hasSaved = false;
-    double saveCompleteTime = 0;
-    double invalidNameTime = -1;
 
-    int screenWidth = GetScreenWidth();
-    int screenHeight = GetScreenHeight();
+    if (testCounts < MaxTests) {
 
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
 
-        if (state != ENTER_TEST_NAME) {
-            DrawText(TextFormat("Creating: %s", testName.c_str()), 20, 20, 20, DARKBLUE);
-        }
+        string testName;
 
-        switch (state) {
-        case ENTER_TEST_NAME: {
-            Rectangle nameBox = { screenWidth / 2 - 300, screenHeight / 2 - 20, 600, 40 };
-            testName = TextInputBox(nameBox, "Enter test name:", testName, true);
+        while (true) {
 
-            if (IsKeyPressed(KEY_ENTER)) {
-                nameValid = !testName.empty() &&
-                    (testName.find_first_not_of(' ') != string::npos) &&
-                    (!ifstream(testName + ".txt").good());
+            cout << "Enter a name for the test: ";
+            getline(cin, testName);
 
-                if (nameValid) {
-                    testNames[testCounts++] = testName;
-                    questionCount = 0;
-                    state = ENTER_QUESTION;
-                    invalidNameTime = -1;
-                }
-                else invalidNameTime = GetTime();
+
+            //this is to check if the input is not empty or just spaces
+            if (testName.empty() || testName.find_first_not_of(' ') == string::npos) {
+                //testName.empty() checks if the testName string is empty
+                //testName.find_first_not_of(' ') == string::npos check the test name if has no characters other than spaces (find_first_not_of returns npos if no non-space character is found)
+                cout << "Invalid test name. Please enter a valid name.\n";
             }
-
-            if (invalidNameTime > 0 && GetTime() - invalidNameTime < 3) {
-                DrawText("Invalid or existing name!", nameBox.x, nameBox.y + 50, 20, RED);
-            }
-            break;
-        }
-
-        case ENTER_QUESTION: {
-            char header[50];
-            snprintf(header, 50, "Question %d/%d", questionCount + 1, MaxQuestions);
-            int textWidth = MeasureText(header, 20);
-            DrawText(header, (screenWidth - textWidth) / 2, 100, 20, DARKGRAY);
-
-            Rectangle questionBox = { screenWidth / 2 - 300, screenHeight / 2 - 20, 600, 40 };
-            currentQuestion = TextInputBox(questionBox, "Enter question or 'done(d)':", currentQuestion, true);
-
-            if (IsKeyPressed(KEY_ENTER)) {
-                if (currentQuestion == "done" || currentQuestion == "d") {
-                    state = SAVING;
+            else {
+                // Check if a test with this name already exists
+                ifstream testFile(testName + ".txt");
+                if (testFile.good()) {
+                    cout << "A test with this name already exists. Please choose a different name.\n";
+                    testFile.close();
                 }
                 else {
-                    questions[questionCount] = currentQuestion;
-                    currentAnswerCount = 0;
-                    state = ENTER_ANSWER;
-                    currentQuestion.clear();
+                    break; // Name is valid and unique
                 }
             }
-            break;
         }
 
-        case ENTER_ANSWER: {
-            char questionInfo[100];
-            snprintf(questionInfo, 100, "Question %d: %s", questionCount + 1, questions[questionCount].c_str());
-            int qWidth = MeasureText(questionInfo, 20);
-            DrawText(questionInfo, (screenWidth - qWidth) / 2, 100, 20, DARKGRAY);
+        testNames[testCounts] = testName; // Store the test name
+        testCounts++; // Increment the test count
+        questionCount = 0; // Reset the question count
 
-            char answerInfo[50];
-            snprintf(answerInfo, 50, "Answer %d/%d", currentAnswerCount + 1, MaxAnswers);
-            int aWidth = MeasureText(answerInfo, 20);
-            DrawText(answerInfo, (screenWidth - aWidth) / 2, 140, 20, DARKGRAY);
+        string input;
 
-            Rectangle answerBox = { screenWidth / 2 - 300, screenHeight / 2 - 20, 600, 40 };
-            currentAnswer = TextInputBox(answerBox, "Enter answeror or 'done(d)':", currentAnswer, true);
+        while (questionCount < MaxQuestions) {
+            cout << "Question number " << questionCount + 1 << " or 'done'(d) to finish: ";
+            getline(cin, input);
 
-            if (IsKeyPressed(KEY_ENTER)) {
-                if (currentAnswer == "done" || currentAnswer == "d") {
-                    answerCounts[questionCount] = currentAnswerCount;
-                    questionCount++;
-                    state = ENTER_QUESTION;
-                    currentAnswer.clear();
-                }
-                else {
-                    answers[questionCount][currentAnswerCount++] = currentAnswer;
-                    currentAnswer.clear();
-                }
+            if (input == "done" || input == "d") { break; } // Stop if the user types 'done'
+
+            questions[questionCount] = input; // Store the question
+
+            // Add answers
+            int count = 0; // Counter for the number of answers
+            while (count < MaxAnswers) {
+                cout << "Enter correct answer " << count + 1 << " or 'done'(d) to finish: ";
+                string answer;
+                getline(cin, answer);
+
+                if (answer == "done" || answer == "d") { break; } // Stop if the user types 'done'
+
+                answers[questionCount][count] = answer; // Store the answer
+                count++; // Increment the answer count
             }
-            break;
+            answerCounts[questionCount] = count; // Store the number of answers
+            questionCount++; // Move to the next question
         }
 
-        case SAVING: {
-            char saveText[100];
-            snprintf(saveText, 100, "Saving %s (%d questions)", testName.c_str(), questionCount);
-            int saveWidth = MeasureText(saveText, 30);
-            DrawText(saveText, (screenWidth - saveWidth) / 2, screenHeight / 2 - 30, 30, DARKGRAY);
+        //to save the test to new a file
+        ofstream outFile(testName + ".txt");
 
-            if (!hasSaved) {
-                ofstream outFile(testName + ".txt");
-                if (outFile) {
-                    outFile << questionCount << "\n";
-                    for (int i = 0; i < questionCount; i++) {
-                        outFile << questions[i] << "\n" << answerCounts[i] << "\n";
-                        for (int j = 0; j < answerCounts[i]; j++)
-                            outFile << answers[i][j] << "\n";
-                    }
-                    outFile.close();
-
-                    ofstream testsFile("tests.txt", ios::app);
-                    if (testsFile) {
-                        testsFile << testName << "\n";
-                        testsFile.close();
-                        hasSaved = true;
-                        saveCompleteTime = GetTime();
-                    }
+        if (outFile.is_open()) {
+            outFile << questionCount << "\n"; // Save the number of questions
+            for (int i = 0; i < questionCount; i++) {
+                outFile << questions[i] << "\n"; // Save the question
+                outFile << answerCounts[i] << "\n"; // Save the number of answers
+                for (int j = 0; j < answerCounts[i]; j++) {
+                    outFile << answers[i][j] << "\n"; // Save each answer
                 }
             }
+            outFile.close();
+            cout << "Test saved to " << testName << ".txt\n";
 
-            if (hasSaved) {
-                DrawText("Test saved successfully!",
-                    (screenWidth - MeasureText("Test saved successfully!", 30)) / 2,
-                    screenHeight / 2 + 20, 30, GREEN);
-                if (GetTime() - saveCompleteTime > 1) return;
+
+            //saves the test name to tests.txt
+            ofstream testsFile("tests.txt", ios::app);//ios::app so it dosen't delete every time it is closed
+
+            if (testsFile.is_open()) {//checks if the file was opened
+
+                testsFile << testName << "\n"; //saves the test name
+
+                testsFile.close();//closes file
+
             }
-            break;
+            else {
+                cout << "Error: Unable to save the test name to tests.txt.\n";
+            }
+
+
+
         }
+        else {
+            cout << "Error: Unable to save the test to a file.\n";
         }
-        EndDrawing();
+
+
+
     }
+    else {
+        cout << "You have reached the maximum number of tests!!\n";
+    }
+
+
+
 }
