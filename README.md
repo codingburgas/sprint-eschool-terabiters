@@ -1,10 +1,11 @@
+
+
+<img src="/Logo/Logo.png" alt="Logo">
+
+
 # Terabyters Team: E-School 🚀📚
 
 Welcome to the **Terabyters** repository! We are committed to revolutionizing education through digital technologies. Join us in creating an innovative e-school!
-
-## About Terabyters 🌟
-
-**Terabyters** is a team of passionate developers and educators united by a common goal: to make education accessible, interactive, and efficient. We use modern technologies to create convenient digital learning solutions.
 
 ## Key Members 👩‍💻👨‍💻
 
@@ -13,9 +14,6 @@ Welcome to the **Terabyters** repository! We are committed to revolutionizing ed
 - **Damyan Vladislavov Kerchev (Developer)**: Contributes to software design and development, ensuring stability and performance.
 - **Gabriela Yasnova Stoyanova (Developer)**: Helps in project development and optimization, making the platform more user-friendly and functional.
 
-## About the Project: E-School 📖💻
-
-We have developed an **interactive e-school** using **C++** and the **string** library. Our goal is to create a user-friendly educational platform that provides a personalized and flexible learning approach.
 
 ## Key Features 🚀
 
@@ -23,19 +21,21 @@ We have developed an **interactive e-school** using **C++** and the **string** l
 - **Interactive Learning Modules**: Development of educational materials, including tests and simulations.
 - **User-Friendly Interface**: An intuitive design that makes it easy for users of all ages to adapt.
 
-## Future Innovations 🔮
 
-We aim to enhance our project by incorporating cutting-edge technologies:
+## Used technologies
+- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/640px-ISO_C%2B%2B_Logo.svg.png" width="15" height="15"> C++ <br>
 
-- **Artificial Intelligence**: Development of an intelligent assistant to support students.
-- **Gamification of Learning**: Integration of game mechanics to boost student engagement.
-- **Performance Analytics**: Tools for monitoring and analyzing student progress.
+- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Visual_Studio_Icon_2022.svg/640px-Visual_Studio_Icon_2022.svg.png" width="15" height="15"> Visual Studio <br>
+- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/MicroTeams.png/640px-MicroTeams.png" width="15" height="15"> Microsoft Teams <br>
 
-## How to Contribute? 🌐
+- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Microsoft_Word_2013-2019_logo.svg/587px-Microsoft_Word_2013-2019_logo.svg.png?20221202081051" width="15" height="15"> Microsoft Word <br>
+- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Microsoft_Office_PowerPoint_%282019%E2%80%93present%29.svg/640px-Microsoft_Office_PowerPoint_%282019%E2%80%93present%29.svg.png" width="15" height="15"> Microsoft PowerPoint <br>
+- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/300px-GitHub_Invertocat_Logo.svg.png" width="15" height="15"> GitHub <br>
 
-If you are interested in the digital transformation of education, we would love to have your contributions! Join us, share your ideas, and together, we will create the school of the future.
 
-## Join Us! 🎓
+## Documentation
+See our [Documentation](https://codingburgas-my.sharepoint.com/:w:/g/personal/dvkerchev23_codingburgas_bg/Efm3yWNODopDv6u7eqRwGQoBVRk8zVnPL9aOXozSQUC_jA?e=tLaq3v)
 
-Ready to transform the world of education? Fork this repository, dive into our project, and let's build the future of digital learning together! 🚀
 
+ ## Presentation
+See our [Presentation](https://codingburgas-my.sharepoint.com/:p:/g/personal/dvkerchev23_codingburgas_bg/Eau-uBtQ7P1GoBcZ17ibkeoBgQQJWDu2ZcPCiTRW4XLtxg?e=BNPWuY)
