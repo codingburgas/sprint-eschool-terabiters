@@ -17,10 +17,13 @@ int questionCount = 0;
 string testNames[MaxTests];
 int testCounts = 0;
 
+
 int main() {
-    // Load existing tests on startup
+    //load existing tests on startup
     ifstream testsFile("tests.txt");
     if (testsFile.is_open()) {
+
+      //read each line from the file if there's room in the 'testNames'
         while (getline(testsFile, testNames[testCounts]) && testCounts < MaxTests) {
             testCounts++;
         }

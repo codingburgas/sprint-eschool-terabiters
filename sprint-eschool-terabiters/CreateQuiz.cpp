@@ -30,7 +30,7 @@ void CreateQuiz() {
                 //check if a test with this name already exists
                 ifstream testFile(testName + ".txt");
                 if (testFile.good()) {
-                    cout << "A test with this name already exists. Please choose a different name.\n";
+                    cout << "A test with this name already exists! Please choose a different name.\n";
                     testFile.close();
                 }
                 else {
@@ -50,7 +50,7 @@ void CreateQuiz() {
         string input;
 
         while (questionCount < MaxQuestions) {
-            cout << "Question number " << questionCount + 1 << " or 'done'(d) to finish: ";
+            cout << "\nQuestion number " << questionCount + 1 << " or 'done'(d) to finish: ";
             getline(cin, input);
 
             if (input == "done" || input == "d") { break; } 
@@ -77,20 +77,20 @@ void CreateQuiz() {
             questionCount++; //move to next question
         }
 
-        //to save the test to new a file
+        //save the test to new a file
         ofstream outFile(testName + ".txt");
 
         if (outFile.is_open()) {
             outFile << questionCount << "\n"; //save the number of questions
             for (int i = 0; i < questionCount; i++) {
-                outFile << questions[i] << "\n"; //save the question
-                outFile << answerCounts[i] << "\n"; //save the number of answers
+                outFile << questions[i] << "\n";
+                outFile << answerCounts[i] << "\n"; 
                 for (int j = 0; j < answerCounts[i]; j++) {
-                    outFile << answers[i][j] << "\n"; //save each answer
+                    outFile << answers[i][j] << "\n"; //save answers
                 }
             }
             outFile.close();
-            cout << "Test saved to " << testName << ".txt\n";
+            cout << "\nTest saved to " << testName << ".txt\n";
 
 
             //saves the test name to tests.txt

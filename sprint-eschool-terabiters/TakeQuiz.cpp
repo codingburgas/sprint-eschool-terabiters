@@ -15,13 +15,14 @@ void TakeQuiz() {
         return;
     }
 
-    // Store tests and display numbered list
+    //store tests
     string testNames[100];
     int count = 0;
     cout << "\nAvailable Tests:\n";
     string testName;
     while (getline(testsFile, testName)) {
-        if (testName.empty() || testName.find_first_not_of(' ') == string::npos) continue;
+        if (testName.empty() || testName.find_first_not_of(' ') == string::npos) continue;  //checks if the 'testName' string is empty or contains only spaces
+
         if (count < 100) {
             testNames[count] = testName;
             cout << (count + 1) << ". " << testName << endl;
@@ -35,7 +36,7 @@ void TakeQuiz() {
         return;
     }
 
-    // Get numeric test selection
+   
     int testChoice;
     cout << "Enter the number of the test you want to take: ";
     cin >> testChoice;
@@ -48,7 +49,7 @@ void TakeQuiz() {
 
     string selectedTestName = testNames[testChoice - 1];
 
-    // Open selected test file (rest remains unchanged)
+    //open selected test file
     ifstream inFile(selectedTestName + ".txt");
     if (inFile.is_open()) {
         inFile >> questionCount;
