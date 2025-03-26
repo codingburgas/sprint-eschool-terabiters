@@ -1,7 +1,8 @@
 
 
-<img src="/Logo/Logo.png" alt="Logo">
-
+<p align="center">
+  <img src="/Logo/Logo.png" alt="Logo">
+</p>
 
 # Terabyters Team: E-School 🚀📚
 
